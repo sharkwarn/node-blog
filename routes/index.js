@@ -8,7 +8,7 @@ export default app => {
 
   app.use('/upload', upload);
 
-  app.use('/article', article)
+  app.use('/article', article);
 
   app.use('/register', (req, res) => {
     res.send('hehehe');

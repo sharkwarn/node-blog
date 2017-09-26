@@ -11,7 +11,7 @@ global.app = Express();
 app.use(cookieParser());
 //使用post提交方式
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 //静态文件资源
 
