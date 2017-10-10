@@ -1,7 +1,6 @@
 import Express from 'express';
 import cookieParser from'cookie-parser';
 import bodyParser from 'body-parser';
-import markdown from 'markdown';
 
 import config from './config';
 import db from './mongoose';
@@ -41,7 +40,7 @@ app.get('/yes',(req,res)=>{
 })
 
 app.all('*',(req,res)=>{
-  res.send(`404 页面没有找到！！！`)
+  res.sendStatus(404).send(`404 页面没有找到！！！`)
 })
 
 

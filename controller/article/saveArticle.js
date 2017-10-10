@@ -1,8 +1,7 @@
-import {markdown} from 'markdown';
 import ArticleModel from './../../mongoose/article';
 
-const saveArticle = (req, res) => {
-  const { creator, name, content } = req.body;
+const saveArticle = (req, res) => { 
+  const { creator, name, content, titleImg } = req.body;
   const errorArr = [];
   if (!creator) {
     errorArr.push('创建者不存在！');
@@ -14,6 +13,10 @@ const saveArticle = (req, res) => {
   
   if (!content) {
     errorArr.push('文章内容不存在！');
+  }
+
+  if (!titleImg) {
+    errorArr.push('文章主题图片不存在！');
   }
 
   if (errorArr.length > 0) {
@@ -30,14 +33,13 @@ const saveArticle = (req, res) => {
     name: name,
     time: time,
     creator: creator,
+    titleImg: titleImg,
     editor: '',
     editTime: 0,
-    content: markdown.toHTML(content)
+    content: content
   });
-  console.log(article);
   article.save((err, data) => {
     if (err) {
-      console.log(err);
       res.send({
         code: 500,
         success: false,

@@ -5,8 +5,5 @@ const router = express.Router();
 
 router.post('/saveFile',fileUpload.saveFile);
 router.get('/getfile',getUploadFile);
-router.post('/*', (req, res)=> {
-  res.send('hahahah')
-});
 
 export default router;

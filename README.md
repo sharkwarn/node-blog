@@ -61,3 +61,42 @@
   ```
   
   ```
+
+
+# 遇到的坑
+
+##### mongoose 根据 _id 查询结果
+
+_id 并不是普通的字符串，而是特殊的标记。因此需要转换成ObjectId。
+
+```
+mongoose.Types.ObjectId(id);
+```
+
+示例：
+
+```
+const arr = [];
+getIds.map((item) => {
+  arr.push(`(${mongoose.Types.ObjectId(item)})?`);
+})    
+const reg = new RegExp(arr.join(''));
+articleModel.find({ '_id': getIds },function(err, data){
+  // console.log(data);
+  if (err) {
+    console.log(err);
+    res.send({
+      code: 200,
+      success: false,
+      msgCode: '没有查询到结果或者数据不存在',
+      data: {}
+    });
+    return;
+  }
+  res.send({
+    code: 200,
+    success: true,
+    data: data
+  })
+})
+```
